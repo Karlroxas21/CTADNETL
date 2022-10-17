@@ -1,0 +1,92 @@
+Task 2:
+
+(config)#hostname "hostname"
+
+(config)no ip domain-lookup
+
+(config)# enable secret nationaluniversity
+
+#line console 0
+#password "roxas"
+login
+logging synchronous
+
+(config)# line vty 0
+(config)# password roxas
+(config)# login
+(config)# logging synchronous
+
+________________
+
+S2(config)# interface range fa0/6, fa0/11, fa0/18
+S2(config-if-range)# switchport mode access
+S2(config-if-range)# no shutdown
+
+S3(config)# interface range fa0/6, fa0/11, fa0/18
+S3(config-if-range)# switchport mode access
+S3(config-if-range)# no shutdown
+
+
+Task 3:
+
+S1(config)#vlan 10 
+S1(config-vlan)#name faculty/staff 
+S1(config-vlan)#vlan 20 
+S1(config-vlan)#name students 
+S1(config-vlan)#vlan 30 
+S1(config-vlan)#name guest 
+S1(config-vlan)#vlan 99 
+S1(config-vlan)#name management 
+S1(config-vlan)#end 
+________________
+
+S1# show vlan brief
+
+________________
+
+S3(config)#interface range fa0/6-10 
+S3(config-if-range)#switchport access vlan 30 
+S3(config-if-range)#interface range fa0/11-17 
+S3(config-if-range)#switchport access vlan 10 
+S3(config-if-range)#interface range fa0/18-24 
+S3(config-if-range)#switchport access vlan 20 
+S3(config-if-range)#end 
+S3#copy running-config startup-config
+
+________________
+
+#show vlan id 10
+
+________________
+
+S1(config)#interface vlan 99 
+S1(config-if)#ip address 172.17.99.11 255.255.255.0 
+S1(config-if)#no shutdown 
+
+S2(config)#interface vlan 99 
+S2(config-if)#ip address 172.17.99.12 255.255.255.0 
+S2(config-if)#no shutdown 
+
+S3(config)#interface vlan 99 
+S3(config-if)#ip address 172.17.99.13 255.255.255.0 
+S3(config-if)#no shutdown 
+
+________________
+
+S1(config)#interface range fa0/1-5 
+S1(config-if-range)#switchport mode trunk 
+S1(config-if-range)#switchport trunk native vlan 99 
+S1(config-if-range)#no shutdown 
+S1(config-if-range)#end 
+S2(config)# interface range fa0/1-5 
+S2(config-if-range)#switchport mode trunk      
+S2(config-if-range)#switchport trunk native vlan 99 
+S2(config-if-range)#no shutdown 
+S2(config-if-range)#end 
+S3(config)# interface range fa0/1-5 
+S3(config-if-range)#switchport mode trunk      
+S3(config-if-range)#switchport trunk native vlan 99 
+S3(config-if-range)#no shutdown 
+S3(config-if-range)#end 
+
+

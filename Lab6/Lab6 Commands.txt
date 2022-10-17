@@ -1,0 +1,64 @@
+(config)#hostname karlMAINOFFICE
+
+(config)#line console 0
+(config-line)# password karl
+(config-line)# login
+(config-line)# logging synchronous
+(config-line)# exec-timeout 4 0
+(config)#line aux 0
+(config-line)# password karl
+(config-line)# login
+(config-line)# logging synchronous
+(config-line)# exec-timeout 4 0
+(config)#line vty 0 4
+(config-line)# password karl
+(config-line)# login
+(config-line)# logging synchronous
+(config-line)# exec-timeout 4 0
+
+(config)# enable password vallo
+
+(config)# interface fa 0/0
+(config-if)# ip address 172.16.0.1 255.255.0.0
+(config-if)# no shutdown
+
+(config)# ip dhcp excluded-address 172.16.0.1 172.16.0.100
+(config)#ip dhcp pool main_office
+(dhcp-config)# network 172.16.0.0 255.255.0.0
+(dhcp-config)# default router 172.16.0.1
+(dhcp-config)# dns-server 172.16.0.1
+
+
+____________________________
+(config)#hostname karlBRANCH_OFFICE
+
+(config)#line console 0
+(config-line)# password karl
+(config-line)# login
+(config-line)# logging synchronous
+(config-line)# exec-timeout 3 0
+(config)#line aux 0
+(config-line)# password karl
+(config-line)# login
+(config-line)# logging synchronous
+(config-line)# exec-timeout 3 0
+(config)#line vty 0 4
+(config-line)# password karl
+(config-line)# login
+(config-line)# logging synchronous
+(config-line)# exec-timeout 3 0
+
+(config)# enable password vallo
+
+(config)# interface fa 0/0
+(config-if)# ip address 172.31.0.1 255.255.0.0
+(config-if)# no shutdown
+
+(config)# ip dhcp excluded-address 172.31.0.1 172.31.0.50
+(config)#ip dhcp pool branch_office
+(dhcp-config)# network 172.31.0.0 255.255.0.0
+(dhcp-config)# default router 172.31.0.1
+(dhcp-config)# dns-server 172.31.0.1
+
+
+
